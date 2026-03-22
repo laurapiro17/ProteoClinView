@@ -12,7 +12,11 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 import streamlit as st
 import polars as pl
 import numpy as np
-import pyopenms as oms
+try:
+    import pyopenms as oms
+    OMS_AVAILABLE = True
+except Exception:
+    OMS_AVAILABLE = False
 
 from openms_insight import SequenceView, LinePlot, StateManager
 
@@ -30,6 +34,8 @@ EXAMPLE_MZML = Path(__file__).parent.parent / "example_data" / "insulin_b_chain_
 
 def load_mzml(path: str) -> list:
     """Load mzML and return list of MS2 spectra as dicts."""
+    if not OMS_AVAILABLE:
+        return []
     exp = oms.MSExperiment()
     oms.MzMLFile().load(path, exp)
     spectra = []
@@ -111,6 +117,10 @@ with st.sidebar:
 
     selected_scan = None
     mzml_spectra  = []
+
+    if spectrum_source in ("Load example mzML", "Upload mzML") and not OMS_AVAILABLE:
+        st.info("mzML loading requires pyopenms (not available in this environment). Use Synthetic demo mode.")
+        spectrum_source = "Synthetic demo"
 
     if spectrum_source == "Load example mzML":
         if EXAMPLE_MZML.exists():
