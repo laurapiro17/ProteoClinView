@@ -18,7 +18,7 @@ from utils.plots import make_mirror_plot
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## ⚙️ Settings")
+    st.markdown("## Settings")
 
     # Carry over from sequence viewer if navigated from there
     default_seq   = st.session_state.get("mirror_sequence", "FVNQHLCGSHLVEALYLVCGERGFFYTPKT")
@@ -37,7 +37,7 @@ with st.sidebar:
         info = DEMO_PROTEINS[protein_name]
         sequence = info["sequence"]
         st.caption(f"**{info['description']}**")
-        st.info(f"🏥 {info['clinical_note']}")
+        st.info(info['clinical_note'])
     else:
         sequence = st.text_area(
             "Amino acid sequence",
@@ -47,11 +47,11 @@ with st.sidebar:
     st.markdown("### Step 2 · Ion types & charges")
     col_c, col_z = st.columns(2)
     with col_c:
-        use_c = st.checkbox("c-ions 🔵", value="c" in default_ions)
-        use_b = st.checkbox("b-ions 🟣", value="b" in default_ions)
+        use_c = st.checkbox("c-ions", value="c" in default_ions)
+        use_b = st.checkbox("b-ions", value="b" in default_ions)
     with col_z:
-        use_z = st.checkbox("z-ions 🟠", value="z" in default_ions)
-        use_y = st.checkbox("y-ions 🟢", value="y" in default_ions)
+        use_z = st.checkbox("z-ions", value="z" in default_ions)
+        use_y = st.checkbox("y-ions", value="y" in default_ions)
 
     ion_types = (["c"] if use_c else []) + (["z"] if use_z else []) + \
                 (["b"] if use_b else []) + (["y"] if use_y else [])
@@ -92,7 +92,7 @@ with st.sidebar:
     st.caption("ProteoClinView · OpenMS GSoC 2026")
 
 # ── Main ──────────────────────────────────────────────────────────────────────
-st.markdown("# 📊 Mirror Plot")
+st.markdown("# Mirror Plot")
 st.caption(
     "**Top half:** experimental spectrum — coloured peaks are matched fragment ions.  \n"
     "**Bottom half:** theoretical ions (mirrored) — solid = matched, dotted = unmatched.  \n"
@@ -159,7 +159,7 @@ m4.metric("Mass tolerance", f"{tolerance_ppm} ppm")
 
 if exp_source == "Synthetic demo (auto-generated)":
     st.info(
-        "📌 **Demo mode** — the experimental spectrum is synthetically generated from the theoretical ions "
+        "**Demo mode** — the experimental spectrum is synthetically generated from the theoretical ions "
         "(with ~25% random missing peaks, <5 ppm m/z noise, and background noise peaks). "
         "Upload your own peak list in the sidebar for real data.",
         icon=None,
@@ -203,7 +203,7 @@ st.dataframe(
 
 # Export
 csv = matched_display[cols_show].rename(columns=dict(zip(cols_show, col_names))).to_csv(index=False).encode("utf-8")
-st.download_button("⬇️ Download matched ions as CSV", data=csv,
+st.download_button("Download matched ions as CSV", data=csv,
                    file_name="proteoclinview_matched.csv", mime="text/csv")
 
 # ── Navigation ────────────────────────────────────────────────────────────────
@@ -212,5 +212,5 @@ col_nav1, col_nav2 = st.columns([2, 1])
 with col_nav1:
     st.markdown("**Go back** to the Sequence Viewer to adjust ion types or explore a different protein.")
 with col_nav2:
-    if st.button("← Sequence Viewer", use_container_width=True):
+    if st.button("<- Sequence Viewer", use_container_width=True):
         st.switch_page("pages/sequence_viewer.py")

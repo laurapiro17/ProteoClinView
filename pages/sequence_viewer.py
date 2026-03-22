@@ -24,7 +24,7 @@ CACHE_DIR.mkdir(exist_ok=True)
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## ⚙️ Settings")
+    st.markdown("## Settings")
 
     demo_mode     = st.session_state.get("demo_mode", True)
     demo_protein  = st.session_state.get("demo_protein", "Human Insulin B chain")
@@ -43,7 +43,7 @@ with st.sidebar:
         info     = DEMO_PROTEINS[protein_name]
         sequence = info["sequence"]
         st.caption(f"**{info['description']}**  \nUniProt: `{info['uniprot']}`")
-        st.info(f"🏥 **Clinical context:** {info['clinical_note']}")
+        st.info(f"**Clinical context:** {info['clinical_note']}")
     else:
         sequence = st.text_area(
             "Amino acid sequence (single-letter codes)",
@@ -58,11 +58,11 @@ with st.sidebar:
     )
     col_l, col_r = st.columns(2)
     with col_l:
-        use_c = st.checkbox("c-ions 🔵", value=True)
-        use_b = st.checkbox("b-ions 🟣", value=False)
+        use_c = st.checkbox("c-ions", value=True)
+        use_b = st.checkbox("b-ions", value=False)
     with col_r:
-        use_z = st.checkbox("z-ions 🟠", value=True)
-        use_y = st.checkbox("y-ions 🟢", value=False)
+        use_z = st.checkbox("z-ions", value=True)
+        use_y = st.checkbox("y-ions", value=False)
 
     ion_types = (["c"] if use_c else []) + (["z"] if use_z else []) + \
                 (["b"] if use_b else []) + (["y"] if use_y else [])
@@ -149,7 +149,7 @@ annotated_plot = LinePlot.from_sequence_view(
 )
 
 # ── Page header ───────────────────────────────────────────────────────────────
-st.markdown("# 🧬 Sequence Viewer")
+st.markdown("# Sequence Viewer")
 st.caption(
     "Built on **OpenMS-Insight** `SequenceView` + `LinePlot` with `StateManager` cross-linking.  \n"
     "Click a residue in the sequence map → the corresponding peak is highlighted in the spectrum.  \n"
@@ -209,7 +209,7 @@ if selected_peak is not None:
 st.markdown("---")
 
 # ── Supplementary: Plotly coverage map ───────────────────────────────────────
-with st.expander("📊 Supplementary: Plotly coverage map (for reference)", expanded=False):
+with st.expander("Supplementary: Plotly coverage map (for reference)", expanded=False):
     st.caption(
         "This coverage map uses our custom Plotly renderer. "
         "The OpenMS-Insight SequenceView above is the primary view."
@@ -219,7 +219,7 @@ with st.expander("📊 Supplementary: Plotly coverage map (for reference)", expa
 
 # ── Fragment table ────────────────────────────────────────────────────────────
 st.markdown("---")
-with st.expander("🔍 Fragment ion table", expanded=False):
+with st.expander("Fragment ion table", expanded=False):
     display = matched[["ion_label", "ion_type", "charge", "mz",
                         "matched", "position_from", "position_to", "sequence_covered"]].copy()
     display.columns = ["Ion", "Type", "z+", "Theoretical m/z",
@@ -227,7 +227,7 @@ with st.expander("🔍 Fragment ion table", expanded=False):
     st.dataframe(display.reset_index(drop=True), use_container_width=True, height=280)
 
     csv = display.to_csv(index=False).encode("utf-8")
-    st.download_button("⬇️ Download as CSV", data=csv,
+    st.download_button("Download as CSV", data=csv,
                        file_name="proteoclinview_fragments.csv", mime="text/csv")
 
 # ── Navigation ────────────────────────────────────────────────────────────────
@@ -236,7 +236,7 @@ col1, col2 = st.columns([2, 1])
 with col1:
     st.markdown("**Next:** compare experimental vs theoretical in the Mirror Plot.")
 with col2:
-    if st.button("→ Mirror Plot", type="primary", use_container_width=True):
+    if st.button("Mirror Plot ->", type="primary", use_container_width=True):
         st.session_state["mirror_sequence"]  = sequence
         st.session_state["mirror_ion_types"] = ion_types
         st.session_state["mirror_charges"]   = charges

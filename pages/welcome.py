@@ -1,10 +1,9 @@
 import streamlit as st
 
-# ── Hero ──────────────────────────────────────────────────────────────────────
 col_hero, col_info = st.columns([2, 1], gap="large")
 
 with col_hero:
-    st.markdown("# 🔬 ProteoClinView")
+    st.markdown("# ProteoClinView")
     st.markdown("### Interactive Proteoform Visualization for Top-Down Proteomics")
     st.markdown(
         """
@@ -18,7 +17,7 @@ with col_hero:
     col_a, col_b = st.columns(2)
     with col_a:
         if st.button(
-            "🚀 Launch Demo  ·  no upload needed",
+            "Launch Demo  —  no upload needed",
             use_container_width=True,
             type="primary",
             help="Loads Human Insulin B chain with synthetic MS/MS data. No files required.",
@@ -29,7 +28,7 @@ with col_hero:
 
     with col_b:
         if st.button(
-            "📂 Upload my mzML / sequence",
+            "Upload my mzML / sequence",
             use_container_width=True,
             help="Paste your own amino acid sequence and explore fragment ions.",
         ):
@@ -42,40 +41,38 @@ with col_info:
         """
 | Module | Status |
 |--------|--------|
-| 🧬 Sequence Viewer | ✅ Live |
-| 📊 Mirror Plot | ✅ Live |
-| 🔍 FLASHTnT Search | 🔜 Coming |
-| 🗺️ Feature Map | 🔜 Coming |
+| Sequence Viewer | Live |
+| Mirror Plot | Live |
+| FLASHTnT Search | Planned |
+| Feature Map | Planned |
         """
     )
     st.caption("Built on OpenMS-WebApps · pyOpenMS · Streamlit")
 
-# ── Differentiators ───────────────────────────────────────────────────────────
 st.markdown("---")
 st.markdown("### Designed for every researcher in the lab")
 
 c1, c2, c3 = st.columns(3)
 with c1:
-    st.markdown("**👩‍🔬 Wet-lab scientists**")
+    st.markdown("**Wet-lab scientists**")
     st.markdown(
         "Plain-language labels, guided sidebar workflow, one-click demo with real proteins. "
         "No command line, no configuration files."
     )
 with c2:
-    st.markdown("**🖥️ Computational researchers**")
+    st.markdown("**Computational researchers**")
     st.markdown(
         "Full control over ion types (c, z, b, y), charge states, and mass tolerance. "
-        "Export-ready Plotly figures."
+        "Export-ready figures."
     )
 with c3:
-    st.markdown("**🏥 Clinical researchers**")
+    st.markdown("**Clinical researchers**")
     st.markdown(
         "Clinically annotated demo proteins: hemoglobin (sickle cell variants), insulin (diabetes). "
         "Designed for method development and result interpretation."
     )
 
-# ── Quick explanation ─────────────────────────────────────────────────────────
-with st.expander("ℹ️  What is top-down proteomics? (plain language)"):
+with st.expander("What is top-down proteomics? (plain language)"):
     st.markdown(
         """
         In **top-down proteomics**, intact proteins (proteoforms) are fragmented inside the mass spectrometer
