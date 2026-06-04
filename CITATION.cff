@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "ProteoClinView: Interactive Proteoform-Centric Visualization for Top-Down Proteomics"
+authors:
+  - family-names: "Piñero Roig"
+    given-names: "Laura"
+    orcid: "https://orcid.org/0009-0008-3390-4029"
+    affiliation: "Universitat de Barcelona, Faculty of Medicine"
+abstract: >-
+  GSoC 2026 OpenMS Project C1 proposal prototype. Streamlit-based
+  visualization of intact proteoforms with cross-linked sequence
+  viewer, mirror plot with per-peak delta-ppm, and fragment ion
+  annotation (c, z, b, y; multi-charge) demonstrated on human insulin
+  B chain, ubiquitin, and the hemoglobin alpha N-terminus.
+repository-code: "https://github.com/laurapiro17/ProteoClinView"
+url: "https://laurapiro17-proteoclinview-app-tv7oqq.streamlit.app/"
+license: MIT
+keywords:
+  - top-down proteomics
+  - proteoform
+  - mass spectrometry
+  - OpenMS
+  - pyOpenMS
+  - Streamlit
+  - GSoC 2026
+date-released: 2026-03-22
